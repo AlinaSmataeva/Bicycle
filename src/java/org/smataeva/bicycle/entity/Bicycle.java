@@ -1,24 +1,32 @@
 package java.org.smataeva.bicycle.entity;
 
+import java.util.Arrays;
+import java.util.Objects;
+
 public class Bicycle {
-    private String brand;
+    private String model;
     private int gears;
-    private Wheel wheel;
+    private Wheel[] wheels;
     private Frame frame;
 
-    public Bicycle(String brand, int gears, Wheel wheel, Frame frame) {
-        this.brand = brand;
-        this.gears = gears;
-        this.wheel = wheel;
-        this.frame = frame;
+    public Bicycle(String model) {
+        this.model = model;
     }
 
-    public String getBrand() {
-        return brand;
+    public String getModel() {
+        return model;
     }
 
-    public void setBrand(String brand) {
-        this.brand = brand;
+    public void setModel(String model) {
+        this.model = model;
+    }
+
+    public Frame getFrame() {
+        return frame;
+    }
+
+    public Wheel[] getWheels() {
+        return wheels;
     }
 
     public int getGears() {
@@ -29,19 +37,31 @@ public class Bicycle {
         this.gears = gears;
     }
 
-    public Wheel getWheel() {
-        return wheel;
+    public void setWheels(Wheel[] wheels) {
+        if (wheels == null || wheels.length < 1) {
+            throw new IllegalArgumentException("Invalid number of wheels");
+        }
+
+        int wheelCount = wheels.length;
+        this.wheels = wheels;
+        this.frame = new Frame(wheelCount);
     }
 
-    public void setWheel(Wheel wheel) {
-        this.wheel = wheel;
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Bicycle bicycle = (Bicycle) o;
+        return gears == bicycle.gears && Objects.equals(model, bicycle.model) && Arrays.equals(wheels, bicycle.wheels) && Objects.equals(frame, bicycle.frame);
     }
 
-    public Frame getFrame() {
-        return frame;
-    }
-
-    public void setFrame(Frame frame) {
-        this.frame = frame;
+    @Override
+    public int hashCode() {
+        int result = Objects.hash(model, gears, frame);
+        result = 31 * result + Arrays.hashCode(wheels);
+        return result;
     }
 }
+
+
+
