@@ -10,7 +10,10 @@ public class Frame {
     }
 
     private String determineFrameType(int wheelCount) {
-        if (wheelCount == 2) {
+        if (wheelCount == 1) {
+            return "Mono";
+        }
+         else if (wheelCount == 2) {
             return "Road";
         } else if (wheelCount == 3) {
             return "Tricycle";
