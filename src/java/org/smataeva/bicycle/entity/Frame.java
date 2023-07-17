@@ -4,22 +4,36 @@ import java.util.Objects;
 
 public class Frame {
     private String type;
+    private int holeCount;
 
-    public Frame(int wheelCount) {
-        this.type = determineFrameType(wheelCount);
+    public Frame(){
+
+    }
+    public Frame(int holeCount) {
+        setHoleCount(holeCount);
+        this.type = determineFrameType(holeCount);
     }
 
-    private String determineFrameType(int wheelCount) {
-        if (wheelCount == 1) {
-            return "Mono";
+    private String determineFrameType(int holeCount) {
+        if (holeCount == 1) {
+                return "Mono";
         }
-         else if (wheelCount == 2) {
+          else if (holeCount == 2) {
             return "Road";
-        } else if (wheelCount == 3) {
+        } else if (holeCount == 3) {
             return "Tricycle";
         } else {
-            return "Multiwheel";
+            return "Multi";
         }
+    }
+
+    public int getHoleCount() {
+        return holeCount;
+    }
+
+    public void setHoleCount(int holeCount) {
+        this.holeCount = holeCount;
+        this.type = determineFrameType(holeCount);
     }
 
     public String getType() {
@@ -35,11 +49,19 @@ public class Frame {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Frame frame = (Frame) o;
-        return Objects.equals(type, frame.type);
+        return holeCount == frame.holeCount && Objects.equals(type, frame.type);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(type);
+        return Objects.hash(type, holeCount);
+    }
+
+    @Override
+    public String toString() {
+        return "Frame{" +
+                "type='" + type + '\'' +
+                ", holeCount=" + holeCount +
+                '}';
     }
 }

@@ -1,6 +1,6 @@
-package java.org.smataeva.bicycle.model.dao;
+package java.org.smataeva.bicycle.entity;
 
-public interface BicycleDao {
+public interface BicycleI {
     void ride(); // Метод для движения на велосипеде
     void changeGear(int gear); // Метод для переключения передачи
 }

@@ -18,6 +18,9 @@ public class Wheel {
     public void setDiameter(double diameter) {
         this.diameter = diameter;
     }
+    public boolean isFlat() {
+        return false;
+    }
 
     @Override
     public boolean equals(Object o) {
@@ -30,5 +33,12 @@ public class Wheel {
     @Override
     public int hashCode() {
         return Objects.hash(diameter);
+    }
+
+    @Override
+    public String toString() {
+        return "Wheel{" +
+                "diameter=" + diameter +
+                '}';
     }
 }
